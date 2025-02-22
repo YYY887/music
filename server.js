@@ -240,6 +240,18 @@ async function consturctServer(moduleDefs) {
         })
         console.log('[OK]', decode(req.originalUrl))
 
+        if (req.baseUrl === '/song/url/v1') {
+          const song = moduleResponse['body']['data'][0]
+            if (!song.url || [1, 4].includes(song.fee)) {
+              const match = require('@unblockneteasemusic/server')
+              const source = ['pyncmd', 'qq', 'migu', 'kuwo', 'kugou', 'bilibili']
+              const { url } = await match(req.query.id, source)
+              song.url = url
+              song.freeTrialInfo = null // 对于Splayer来说，去除开通会员提示
+            }
+        }
+
+
         const cookies = moduleResponse.cookie
         if (!query.noCookie) {
           if (Array.isArray(cookies) && cookies.length > 0) {
