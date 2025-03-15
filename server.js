@@ -239,7 +239,7 @@ async function consturctServer(moduleDefs) {
           return request(...obj)
         })
         console.log('[OK]', decode(req.originalUrl))
-
+/*
         if (req.baseUrl === '/song/url/v1' || req.baseUrl === '/song/url') {
           const song = moduleResponse['body']['data'][0]
             if (!song.url || [1, 4].includes(song.fee)) {
@@ -251,7 +251,7 @@ async function consturctServer(moduleDefs) {
               console.log("解灰成功!")// 对于Splayer来说，去除开通会员提示
             }
         }
-
+*/
 
         const cookies = moduleResponse.cookie
         if (!query.noCookie) {
