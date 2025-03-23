@@ -147,8 +147,7 @@ async function consturctServer(moduleDefs) {
     if (req.path !== '/' && !req.path.includes('.')) {
       res.set({
         'Access-Control-Allow-Credentials': true,
-        'Access-Control-Allow-Origin':
-          CORS_ALLOW_ORIGIN || req.headers.origin || '*',
+        'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Headers': 'X-Requested-With,Content-Type',
         'Access-Control-Allow-Methods': 'PUT,POST,GET,DELETE,OPTIONS',
         'Content-Type': 'application/json; charset=utf-8',
@@ -242,7 +241,7 @@ async function consturctServer(moduleDefs) {
 
         if (req.baseUrl === '/song/url/v1' || req.baseUrl === '/song/url') {
           const song = moduleResponse['body']['data'][0]
-            if (song.freeTrialInfo !== null || !song.url || [1, 4].includes(song.fee)) {
+            if ( 1===1 || (song.freeTrialInfo !== null || !song.url || [1, 4].includes(song.fee))) {
               const match = require('@unblockneteasemusic/server')
               const source = ['pyncmd', 'kuwo', 'youtube']
               const { url } = await match(req.query.id, source)
