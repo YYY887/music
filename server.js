@@ -241,12 +241,12 @@ async function consturctServer(moduleDefs) {
 
         if (req.baseUrl === '/song/url/v1' || req.baseUrl === '/song/url') {
           const song = moduleResponse['body']['data'][0]
-            if ( 1===1 || (song.freeTrialInfo !== null || !song.url || [1, 4].includes(song.fee))) {
+            if (song.freeTrialInfo !== null || !song.url || [1, 4].includes(song.fee)) {
               const match = require('@unblockneteasemusic/server')
-              const source = ['pyncmd', 'kuwo', 'youtube']
+              const source = ['pyncmd', 'kuwo']
               const { url } = await match(req.query.id, source)
               song.url = url
-              song.freeTrialInfo = null
+              song.freeTrialInfo = 'unblock'
               console.log("解灰成功!")// 对于Splayer来说，去除开通会员提示
             }
         }
