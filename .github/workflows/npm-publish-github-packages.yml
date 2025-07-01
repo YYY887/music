@@ -7,6 +7,7 @@ on:
       - main
       - "releases/**"
       - dev
+      - refactor-dev
 
 # 按顺序运行作业
 jobs:
