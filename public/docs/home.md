@@ -1,6 +1,6 @@
-# NeteaseCloudMusicApi
+# NeteaseCloudMusicApiReborn
 
-网易云音乐 NodeJS 版 API
+网易云音乐 NodeJS API Reborn
 
 ## 灵感来自
 
@@ -385,7 +385,7 @@ npx NeteaseCloudMusicApi@latest
 
 ## Vercel 部署
 
-v4.0.8 加入了 Vercel 配置文件,可以直接在 Vercel 下部署了,不需要自己的服务器(访问 Vercel 部署的接口,需要额外加一个 realIP 参数,如 `/song/url?id=191254&realIP=116.25.146.177`)
+v4.0.8 加入了 Vercel 配置文件,可以直接在 Vercel 下部署了,不需要自己的服务器(访问 Vercel 部署的接口,需要额外加一个 realIP 参数,如 `/song/url?id=1969519579&realIP=116.25.146.177`)
 
 不能正常访问的,绑定下国内备案过的域名,之后即可正常访问
 
@@ -1536,7 +1536,7 @@ tags: 歌单标签
 
 **接口地址 :** `/song/url`
 
-**调用例子 :** `/song/url?id=33894312` `/song/url?id=405998841,33894312`
+**调用例子 :** `/song/url?id=1969519579` `/song/url?id=1969519579,33894312`
 
 ### 获取音乐 url - 新版
 
@@ -1548,7 +1548,7 @@ tags: 歌单标签
 
 **接口地址 :** `/song/url/v1`
 
-**调用例子 :** `/song/url/v1?id=33894312&level=exhigh` `/song/url/v1?id=405998841,33894312&level=lossless`
+**调用例子 :** `/song/url/v1?id=1969519579&level=exhigh` `/song/url/v1?id=1969519579,33894312&level=lossless`
 
 说明：`杜比全景声`音质需要设备支持，不同的设备可能会返回不同码率的url。cookie需要传入`os=pc`保证返回正常码率的url。
 
@@ -1562,7 +1562,7 @@ tags: 歌单标签
 
 **接口地址 :** `/check/music`
 
-**调用例子 :** `/check/music?id=33894312`
+**调用例子 :** `/check/music?id=1969519579`
 
 ### 获取客户端灰色歌曲链接
 
@@ -1572,7 +1572,7 @@ tags: 歌单标签
 
 **接口地址 :** `/song/url/unblock`
 
-**调用例子 :** `/song/unblock/url/v1?id=2155423468`
+**调用例子 :** `/song/url/unblock?id=1969519579`
 
 ### 搜索
 
