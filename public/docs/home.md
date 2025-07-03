@@ -1569,8 +1569,6 @@ tags: 歌单标签
 说明 : 技术来自于 [UnblockNeteaseMusic](https://github.com/unblockneteasemusic/server) 的支持, 聚合多个音源匹配(有几率匹配不成功)
 
 **必选参数 :** `id` : 音乐 id
- `level`: 播放音质等级, 分为 `standard` => `标准`,`higher` => `较高`, `exhigh`=>`极高`, 
-`lossless`=>`无损`, `hires`=>`Hi-Res`, `jyeffect` => `高清环绕声`, `sky` => `沉浸环绕声`, `dolby` => `杜比全景声`, `jymaster` => `超清母带`
 
 **接口地址 :** `/song/url/unblock`
 
