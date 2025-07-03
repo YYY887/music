@@ -3,9 +3,9 @@
 为停更的网易云音乐 NodeJs API 提供持续的维护！
 
 <p>
-<a href="https://www.npmjs.com/package/NeteaseCloudMusicApiReborn"><img src="https://img.shields.io/npm/v/NeteaseCloudMusicApi.svg" alt="Version"></a>
-<a href="https://www.npmjs.com/package/NeteaseCloudMusicApiReborn"><img src="https://img.shields.io/npm/l/NeteaseCloudMusicApi.svg" alt="License"></a>
-<a href="https://www.npmjs.com/package/NeteaseCloudMusicApiReborn"><img src="https://img.shields.io/david/dev/binaryify/NeteaseCloudMusicApi.svg" alt="devDependencies" ></a>
+<a href="https://www.npmjs.com/package/@neteaseapireborn/api"><img src="https://img.shields.io/npm/v/@neteaseapireborn/api.svg" alt="Version"></a>
+<a href="https://www.npmjs.com/package/@neteaseapireborn/api"><img src="https://img.shields.io/npm/l/NeteaseCloudMusicApi.svg" alt="License"></a>
+<a href="https://www.npmjs.com/package/@neteaseapireborn/api"><img src="https://img.shields.io/david/dev/binaryify/@neteaseapireborn/api.svg" alt="devDependencies" ></a>
 </p>
 
 ## 灵感来自
@@ -26,8 +26,8 @@
 ## 安装
 
 ```shell
-$ git clone https://github.com/IamFurina/NeteaseCloudMusicApiReborn.git
-$ cd NeteaseCloudMusicApi
+$ git clone https://github.com/NeteaseCloudMusicApiReborn/api.git
+$ cd api
 $ pnpm install
 ```
 
@@ -449,6 +449,8 @@ banner({ type: 0 }).then((res) => {
 312. 广播电台 - 电台信息
 313. 广播电台 - 全部电台
 314. 广播电台 - 收藏/取消收藏电台
+315. 获取歌曲解灰链接
+> 支持 `qq` `kuwo` `kugou` `migu` `pyncmd` 音源
 
 ## 单元测试
 

@@ -1,13 +1,13 @@
-# 网易云音乐 API
+# 网易云音乐 API Reborn
 
-> 网易云音乐 NodeJS 版 API
+> 为停更的网易云音乐 NodeJs API 提供持续的维护！
 
-- 全部接口已升级到最新
+- 基于原版网易云API新增更多有趣的功能
 - 具备登录接口,多达200多个接口
 - 更完善的文档
 
 
-[GitLab](https://gitlab.com/Binaryify/NeteaseCloudMusicApi)
+[Github](https://github.com/neteasecloudmusicapireborn/api)
 [Get Started](#neteasecloudmusicapi)
 
 ![color](#ffffff)

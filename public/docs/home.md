@@ -1564,6 +1564,18 @@ tags: 歌单标签
 
 **调用例子 :** `/check/music?id=33894312`
 
+### 获取客户端灰色歌曲链接
+
+说明 : 技术来自于 [UnblockNeteaseMusic](https://github.com/unblockneteasemusic/server) 的支持, 聚合多个音源匹配(有几率匹配不成功)
+
+**必选参数 :** `id` : 音乐 id
+ `level`: 播放音质等级, 分为 `standard` => `标准`,`higher` => `较高`, `exhigh`=>`极高`, 
+`lossless`=>`无损`, `hires`=>`Hi-Res`, `jyeffect` => `高清环绕声`, `sky` => `沉浸环绕声`, `dolby` => `杜比全景声`, `jymaster` => `超清母带`
+
+**接口地址 :** `/song/url/unblock`
+
+**调用例子 :** `/song/download/url/v1?id=2155423468`
+
 ### 搜索
 
 说明 : 调用此接口 , 传入搜索关键词可以搜索该音乐 / 专辑 / 歌手 / 歌单 / 用户 ,
