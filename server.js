@@ -239,19 +239,22 @@ async function consturctServer(moduleDefs) {
           return request(...obj)
         })
         console.log('[OK]', decode(req.originalUrl))
-/*
-        if (req.baseUrl === '/song/url/v1' || req.baseUrl === '/song/url') {
+
+        if (
+          (req.baseUrl === '/song/url/v1' || req.baseUrl === '/song/url') &&
+          process.env.ENABLE_GENERAL_UNBLOCK === 'true'
+        ) {
           const song = moduleResponse['body']['data'][0]
             if (song.freeTrialInfo !== null || !song.url || [1, 4].includes(song.fee)) {
               const match = require('@unblockneteasemusic/server')
-              const source = ['pyncmd', 'kuwo']
+              const source = ['pyncmd','kuwo', 'qq', 'migu', 'kugou']
               const { url } = await match(req.query.id, source)
               song.url = url
-              song.freeTrialInfo = 'unblock'
-              console.log("解灰成功!")// 对于Splayer来说，去除开通会员提示
+              song.freeTrialInfo = 'null'
+              console.log("解灰成功!")
             }
         }
-*/
+
 
         const cookies = moduleResponse.cookie
         if (!query.noCookie) {
