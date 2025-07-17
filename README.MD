@@ -18,7 +18,7 @@
 ```bash
 git clone https://github.com/NeteaseCloudMusicApiReborn/api.git
 cd api
-pnpm install
+pnpm i
 ```
 
 ### 启动服务
@@ -87,7 +87,7 @@ banner({ type: 0 }).then((res) => console.log(res))
 ## 单元测试
 
 ```bash
-npm test
+pnpm test
 ```
 
 ## 主要功能特性
