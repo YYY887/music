@@ -9,7 +9,9 @@ module.exports = async (query, request) => {
         const match = require("@unblockneteasemusic/server")
         const source = ['pyncmd', 'kuwo', 'qq', 'migu', 'kugou']
         const result = await match(query.id, source)
+        const proxy = process.env.PROXY_URL;
         console.log("[OK] 开始解灰", query.id, result)
+        if (result.url.includes('kuwo')) { result.proxyUrl = proxy + result.url }
         return {
             status: 200,
             body: {

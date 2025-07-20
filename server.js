@@ -258,9 +258,12 @@ async function consturctServer(moduleDefs) {
               song.url = url
               song.freeTrialInfo = 'null'
               console.log("解灰成功!")
-            }
+          }
+          if (song.url.includes('kuwo')) {
+            const proxy = process.env.PROXY_URL;
+            if (proxy) {song.proxyUrl = proxy + song.url}
+          }
         }
-
 
         const cookies = moduleResponse.cookie
         if (!query.noCookie) {

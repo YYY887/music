@@ -16,6 +16,10 @@ module.exports = async (query, request) => {
   if (query.unblock === 'true') {
     try {
       const result = await match(query.id, source)
+      console.log('[OK] 开始解灰', query.id, result)
+      if (result.url.includes('kuwo')) {
+        var proxyUrl = process.env.PROXY_URL + result.url
+      }
       let url = Array.isArray(result) ? (result[0]?.url || result[0]) : (result.url || result)
       if (url) {
         return {
@@ -30,6 +34,7 @@ module.exports = async (query, request) => {
                 level: query.level,
                 freeTrialInfo: 'unblock',
                 fee: 0,
+                proxyUrl: proxyUrl || '',
               },
             ],
           },
