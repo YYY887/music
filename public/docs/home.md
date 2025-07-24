@@ -1,6 +1,6 @@
-# NeteaseCloudMusicApiReborn
+# NeteaseCloudMusicApiEnhanced
 
-网易云音乐 NodeJS API Reborn
+网易云音乐 NodeJS API Enhanced(Reborn)
 
 ## 灵感来自
 
@@ -17,7 +17,7 @@
 ## 安装
 
 ```shell
-$ git clone https://github.com/Neteasecloudmusicapireborn/api.git
+$ git clone https://github.com/neteasecloudmusicapienhanced/api-enhanced.git
 $ cd api
 $ pnpm i
 ```
@@ -73,7 +73,7 @@ v4.0.8 加入了 Vercel 配置文件,可以直接在 Vercel 下部署了,不需�
 
 ### 操作方法
 
-1. [fork](https://github.com/neteasecloudmusicapireborn/api/fork) 此项目
+1. [fork](https://github.com/neteasecloudmusicapienhanced/api-enhanced/fork) 此项目
 2. 在 Vercel 官网点击 `New Project`
 3. 点击 `Import Git Repository` 并选择你 fork 的此项目并点击`import`
 4. 点击 `PERSONAL ACCOUNT` 的 `select`
@@ -84,7 +84,7 @@ v4.0.8 加入了 Vercel 配置文件,可以直接在 Vercel 下部署了,不需�
 ## 腾讯云 serverless 部署
 因 `Vercel` 在国内访问太慢(不绑定自己的域名的情况下),在此提供腾讯云 serverless 部署方法
 ### 操作方法
-1. [fork](https://github.com/neteasecloudmusicapireborn/api/fork)  此项目
+1. [fork](https://github.com/neteasecloudmusicapienhanced/api-enhanced/fork)  此项目
 2. 在腾讯云serverless应用管理页面( https://console.cloud.tencent.com/sls ),点击`新建应用`
 3. 顶部`创建方式`选择 `Web 应用`
 4. 选择 `Express框架`,点击底部`下一步按钮`
@@ -185,7 +185,7 @@ docker run -d -p 3000:3000 -e http_proxy= -e https_proxy= -e no_proxy= -e HTTP_P
 > 以下是自行 build docker 镜像方式
 
 ```
-$ git clone https://github.com/neteasecloudmusicapireborn/api.git && cd api
+$ git clone https://github.com/neteasecloudmusicapienhanced/api-enhanced.git && cd api
 
 $ sudo docker build . -t netease-music-api
 
@@ -552,7 +552,7 @@ signature：用户签名
 
 ### 更新头像
 
-说明 : 登录后调用此接口,使用`'Content-Type': 'multipart/form-data'`上传图片 formData(name 为'imgFile'),可更新头像(参考: https://github.com/neteasecloudmusicapireborn/api/blob/main/public/avatar_update.html  ),支持命令行调用,参考module_example目录下`avatar_upload.js`
+说明 : 登录后调用此接口,使用`'Content-Type': 'multipart/form-data'`上传图片 formData(name 为'imgFile'),可更新头像(参考: https://github.com/neteasecloudmusicapienhanced/api-enhanced/blob/main/public/avatar_update.html  ),支持命令行调用,参考module_example目录下`avatar_upload.js`
 
 **可选参数 :**
 
@@ -669,7 +669,7 @@ tags: 歌单标签
 
 ### 歌单封面上传
 
-说明 : 登录后调用此接口,使用`'Content-Type': 'multipart/form-data'`上传图片 formData(name 为'imgFile'),可更新歌单封面(参考:https://github.com/neteasecloudmusicapireborn/api/blob/main/public/playlist_cover_update.html)
+说明 : 登录后调用此接口,使用`'Content-Type': 'multipart/form-data'`上传图片 formData(name 为'imgFile'),可更新歌单封面(参考:https://github.com/neteasecloudmusicapienhanced/api-enhanced/blob/main/public/playlist_cover_update.html)
 
 **必选参数 :**  
 `id`: 歌单 id 3143833470
@@ -2761,7 +2761,7 @@ type : 地区
 
 说明 : 登录后调用此接口,使用`'Content-Type': 'multipart/form-data'`上传 mp3 formData(name 为'songFile'),可上传歌曲到云盘
 
-参考: https://github.com/neteasecloudmusicapireborn/api/blob/main/public/cloud.html
+参考: https://github.com/neteasecloudmusicapienhanced/api-enhanced/blob/main/public/cloud.html
 
 访问地址: http://localhost:3000/cloud.html)
 
@@ -3426,7 +3426,7 @@ type='1009' 获取其 id, 如`/search?keywords= 代码时间 &type=1009`
 
 主机模式:
 
-代码可参考: https://github.com/neteasecloudmusicapireborn/api/blob/main/public/listen_together_host.html
+代码可参考: https://github.com/neteasecloudmusicapienhanced/api-enhanced/blob/main/public/listen_together_host.html
 
 访问地址: http://localhost:3000/listen_together_host.html
 

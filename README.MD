@@ -1,4 +1,4 @@
-# 网易云音乐 API Reborn
+# 网易云音乐 API Enhanced(Reborn)
 
 ---
 
@@ -16,7 +16,7 @@
 ### 安装
 
 ```bash
-git clone https://github.com/NeteaseCloudMusicApiReborn/api.git
+git clone https://github.com/neteasecloudmusicapienhanced/api-enhanced.git
 cd api
 pnpm i
 ```

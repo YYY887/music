@@ -1,4 +1,4 @@
-# 网易云音乐 API Reborn
+# 网易云音乐 API Enhanced Reborn
 
 > 为停更的网易云音乐 NodeJs API 提供持续的维护！
 
@@ -7,7 +7,7 @@
 - 更完善的文档
 
 
-[Github](https://github.com/neteasecloudmusicapireborn/api)
-[Get Started](#neteasecloudmusicapi)
+[Github](https://github.com/neteasecloudmusicapienhanced/api-enhanced)
+[Get Started](#neteasecloudmusicapienhanced)
 
 ![color](#ffffff)
