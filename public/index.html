@@ -1,176 +1,302 @@
 <!DOCTYPE html>
 <html lang="zh">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>网易云音乐 API Enhanced</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@6.5.95/css/materialdesignicons.min.css">
   <style>
-    html, body {
-      height: 100vh;
-      width: 100vw;
+    :root {
+      --primary-color: #2d8cf0;
+      --secondary-color: #42b983;
+      --text-color: #333;
+      --text-secondary: #666;
+      --bg-color: #f5f7fa;
+      --card-bg: rgba(255,255,255,0.95);
+      --hover-bg: #eaf4fb;
+      --border-radius: 12px;
+      --transition: all 0.3s ease;
+      --shadow: 0 8px 24px rgba(31, 38, 135, 0.12);
+      --container-width: 1200px;
+    }
+
+    * {
       margin: 0;
       padding: 0;
-      background: linear-gradient(135deg, #e0eafc 0%, #cfdef3 100%);
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
       font-family: 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', Arial, sans-serif;
-      color: #333;
+      background: linear-gradient(135deg, #e0eafc 0%, #cfdef3 100%);
+      color: var(--text-color);
+      line-height: 1.6;
+    }
+
+    .layout {
+      min-height: 100%;
+      padding: 2rem 1rem;
       display: flex;
       flex-direction: column;
-      justify-content: center;
       align-items: center;
     }
 
     .container {
-      background: rgba(255,255,255,0.95);
-      padding: 2.5em 2em 2em 2em;
-      border-radius: 18px;
-      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.18);
-      max-width: 520px;
-      width: 95vw;
-      margin-top: 2em;
-      margin-bottom: 2em;
-      position: relative;
-      overflow: hidden;
-      animation: fadeIn 1.2s cubic-bezier(.39,.575,.565,1) both;
+      width: 100%;
+      max-width: var(--container-width);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      animation: fadeIn 0.8s ease-out;
     }
 
     @keyframes fadeIn {
-      0% { opacity: 0; transform: translateY(30px); }
-      100% { opacity: 1; transform: translateY(0); }
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
-    h1 {
-      font-size: 2.3em;
-      margin-bottom: 0.5em;
-      color: #2d8cf0;
-      letter-spacing: 1px;
-      font-weight: 700;
+    .header {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 2rem;
+      background: var(--card-bg);
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow);
+    }
+
+    .header h1 {
+      font-size: 2.5rem;
+      color: var(--primary-color);
+      margin-bottom: 1rem;
       text-shadow: 0 2px 8px #e0eafc;
     }
 
-    .version {
-      font-size: 1.1em;
-      color: #888;
-      margin-left: 0.5em;
+    .header p {
+      color: var(--text-secondary);
+      font-size: 1.1rem;
+      max-width: 800px;
+      margin: 0 auto;
     }
 
-    p {
-      font-size: 1.1em;
-      margin-bottom: 1.2em;
-      color: #555;
-      line-height: 1.7;
+    .card {
+      background: var(--card-bg);
+      border-radius: var(--border-radius);
+      padding: 1.5rem;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
     }
 
-    .current-url {
-      font-size: 0.98em;
-      color: #aaa;
-      margin-bottom: 1.2em;
-      word-break: break-all;
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 32px rgba(31, 38, 135, 0.15);
     }
 
-    a {
-      color: #2d8cf0;
-      text-decoration: none;
-      transition: color 0.2s;
-      font-weight: 500;
-    }
-    a:hover {
-      color: #42b983;
-      text-decoration: underline;
-    }
-
-    h2 {
-      font-size: 1.3em;
-      margin: 1.5em 0 0.7em 0;
-      color: #2d8cf0;
-      font-weight: 600;
-    }
-
-    ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      text-align: left;
-      width: 100%;
-    }
-
-    li {
-      margin: 0.6em 0;
-      line-height: 1.7;
+    .card h2 {
+      color: var(--primary-color);
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
       display: flex;
       align-items: center;
-      background: #f4f8fb;
-      border-radius: 6px;
-      padding: 0.5em 1em;
-      transition: box-shadow 0.2s;
-      box-shadow: 0 1px 2px rgba(45,140,240,0.04);
-    }
-    li:hover {
-      box-shadow: 0 4px 12px rgba(45,140,240,0.10);
-      background: #eaf4fb;
+      gap: 0.5rem;
     }
 
-    .number {
-      margin-right: 12px;
-      color: #2d8cf0;
-      font-weight: bold;
-      font-size: 1.1em;
-      min-width: 2em;
+    .card h2 i {
+      font-size: 1.8rem;
+    }
+
+    .feature-list {
+      list-style: none;
+    }
+
+    .feature-item {
+      display: flex;
+      align-items: center;
+      padding: 0.8rem;
+      margin: 0.5rem 0;
+      background: var(--bg-color);
+      border-radius: 8px;
+      transition: var(--transition);
+    }
+
+    .feature-item:hover {
+      background: var(--hover-bg);
+      transform: translateX(5px);
+    }
+
+    .feature-item a {
+      color: var(--text-color);
+      text-decoration: none;
+      flex: 1;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .feature-item i {
+      color: var(--primary-color);
+      font-size: 1.2rem;
+    }
+
+    .status {
+      background: var(--card-bg);
+      padding: 1rem;
+      border-radius: var(--border-radius);
+      margin-top: 2rem;
+      text-align: center;
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+    }
+
+    .version {
       display: inline-block;
-      text-align: right;
+      padding: 0.2rem 0.8rem;
+      background: var(--primary-color);
+      color: white;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      margin-left: 1rem;
     }
 
     .footer {
-      margin-top: 2em;
-      color: #aaa;
-      font-size: 0.98em;
+      grid-column: 1 / -1;
       text-align: center;
-      letter-spacing: 0.5px;
+      margin-top: 2rem;
+      padding: 1rem;
+      color: var(--text-secondary);
+    }
+
+    .footer a {
+      color: var(--primary-color);
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    .footer a:hover {
+      color: var(--secondary-color);
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        grid-template-columns: 1fr;
+      }
+
+      .header h1 {
+        font-size: 2rem;
+      }
+
+      .card {
+        margin: 0 1rem;
+      }
     }
   </style>
 </head>
-
 <body>
-  <div class="container">
-    <h1>网易云音乐 API Enhanced <span id="api-version" class="version"></span></h1>
-    <p>🎵 这是一个持续维护的第三方网易云音乐 API 服务，兼容原版接口，支持多平台部署。</p>
-    <p>当你看到这个页面时，服务已成功运行！</p>
-    <p class="current-url">当前访问：<span id="current-url"></span></p>
-    <a href="/docs" target="_blank">📚 查看接口文档</a>
-    <h2>常用示例</h2>
-    <ul id="example-list">
-      <li><a href="./search?keywords=这么可爱真是抱歉">搜索歌曲</a></li>
-      <li><a href="./song/url/unblock?id=1969519579">歌曲解灰</a></li>
-      <li><a href="./comment/music?id=1969519579&limit=1">获取歌曲评论</a></li>
-      <li><a href="./dj/program?rid=336355127">获取电台节目</a></li>
-      <li><a href="./qrlogin.html">二维码登录演示</a></li>
-      <li><a href="./audio_match_demo/index.html">听歌识曲 Demo</a></li>
-      <li><a href="./cloud.html">云盘上传 Demo</a></li>
-      <li><a href="./eapi_decrypt.html">EAPI 参数/返回值解析</a></li>
-      <li><a href="./api.html">API 调试界面</a></li>
-      <li><a href="./playlist_import.html">歌单导入工具</a></li>
-    </ul>
-    <div class="footer">
-      <span>© 2025 网易云音乐 API Enhanced(Reborn) &nbsp;|&nbsp; <a href="https://github.com/neteasecloudmusicapienhanced/api-enhanced" target="_blank">GitHub</a></span>
+  <div class="layout">
+    <div class="container">
+      <header class="header">
+        <h1>网易云音乐 API Enhanced <span id="api-version" class="version"></span></h1>
+        <p>🔍 A revival project for NeteaseCloudMusicApi Node.js Services</p>
+      </header>
+
+      <div class="card">
+        <h2><i class="mdi mdi-book-open-page-variant"></i>文档与演示</h2>
+        <ul class="feature-list">
+          <li class="feature-item">
+            <a href="/docs" target="_blank">
+              <i class="mdi mdi-file-document"></i>
+              API 文档
+            </a>
+          </li>
+          <li class="feature-item">
+            <a href="./api.html">
+              <i class="mdi mdi-console"></i>
+              API 调试界面
+            </a>
+          </li>
+          <li class="feature-item">
+            <a href="./qrlogin.html">
+              <i class="mdi mdi-qrcode"></i>
+              二维码登录演示
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h2><i class="mdi mdi-music"></i>音乐功能</h2>
+        <ul class="feature-list">
+          <li class="feature-item">
+            <a href="./search?keywords=这么可爱真是抱歉">
+              <i class="mdi mdi-magnify"></i>
+              搜索歌曲
+            </a>
+          </li>
+          <li class="feature-item">
+            <a href="./song/url/unblock?id=1969519579">
+              <i class="mdi mdi-lock-open"></i>
+              歌曲解灰
+            </a>
+          </li>
+          <li class="feature-item">
+            <a href="./comment/music?id=1969519579&limit=1">
+              <i class="mdi mdi-comment"></i>
+              获取评论
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h2><i class="mdi mdi-tools"></i>实用工具</h2>
+        <ul class="feature-list">
+          <li class="feature-item">
+            <a href="./audio_match_demo/index.html">
+              <i class="mdi mdi-music-note-search"></i>
+              听歌识曲
+            </a>
+          </li>
+          <li class="feature-item">
+            <a href="./cloud.html">
+              <i class="mdi mdi-cloud-upload"></i>
+              云盘上传
+            </a>
+          </li>
+          <li class="feature-item">
+            <a href="./playlist_import.html">
+              <i class="mdi mdi-playlist-plus"></i>
+              歌单导入
+            </a>
+          </li>
+          <li class="feature-item">
+            <a href="./eapi_decrypt.html">
+              <i class="mdi mdi-decode"></i>
+              EAPI 解析
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="status">
+        当前访问地址：<span id="current-url"></span>
+      </div>
+
+      <footer class="footer">
+        <span>© 2025 网易云音乐 API Enhanced(Reborn) | </span>
+        <a href="https://github.com/neteasecloudmusicapienhanced/api-enhanced" target="_blank">
+          <i class="mdi mdi-github"></i> GitHub
+        </a>
+      </footer>
     </div>
   </div>
 
-  <script src="https://fastly.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', function() {
-      const currentUrlElement = document.getElementById('current-url');
-      currentUrlElement.textContent = window.location.href;
-
-      const exampleList = document.getElementById('example-list');
-      const items = exampleList.getElementsByTagName('li');
-
-      for (let i = 0; i < items.length; i++) {
-        const number = document.createElement('span');
-        number.className = 'number';
-        number.textContent = (i + 1) + '. ';
-        items[i].prepend(number);
-      }
+      // 显示当前URL
+      document.getElementById('current-url').textContent = window.location.href;
       
       // 获取API版本号
       axios({
@@ -178,13 +304,10 @@
         method: 'post',
         data: {},
       }).then((res) => {
-        const body = res.data;
-        const version = body.data.version;
-        const apiVersionElement = document.getElementById('api-version');
-        apiVersionElement.textContent = ` v${version}`;
+        const version = res.data.data.version;
+        document.getElementById('api-version').textContent = `v${version}`;
       });
     });
   </script>
 </body>
-
 </html>
