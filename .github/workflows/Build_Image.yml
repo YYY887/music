@@ -14,6 +14,11 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      # 读取 package.json 的版本号
+      - name: Read package version
+        id: pkg
+        run: echo "VERSION=$(jq -r .version package.json)" >> $GITHUB_ENV
+
       - name: Log in to Docker Hub
         uses: docker/login-action@v3
         with:
@@ -27,5 +32,5 @@ jobs:
           push: true
           tags: |
             moefurina/ncm-api:latest
-            moefurina/ncm-api:${{ github.sha }}
+            moefurina/ncm-api:${{ env.VERSION }}
           platforms: linux/amd64
