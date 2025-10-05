@@ -101,13 +101,13 @@ docker stop ncm-api && docker rm ncm-api
 docker run -d -p 3000:3000 moefurina/ncm-api:latest
 ```
 
-### Vercel 一键部署
+## Vercel 一键部署
 
 1. fork 本项目
 2. 在 Vercel 官网新建项目，导入 fork 的仓库
 3. 直接 Deploy
 
-### 腾讯云 Serverless 部署
+## 腾讯云 Serverless 部署
 
 1. fork 本项目
 2. 在腾讯云 serverless 控制台新建 Web 应用，选择 Express 框架
