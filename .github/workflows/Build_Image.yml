@@ -2,11 +2,8 @@ name: Publish Docker image
 
 on:
   push:
-    branches:
-      - main
-      - master
-    tags:
-      - "v*"
+    branches: [main, master]
+    tags: ["v*"]
   workflow_dispatch:
 
 jobs:
@@ -14,32 +11,15 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # 1️⃣ 检出代码
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # 2️⃣ 设置 Node 环境（可选：若需打包前构建）
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 18
-
-      # 3️⃣ 安装依赖与构建（如果你的 app 直接运行 app.js，可略）
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Build (optional)
-        run: |
-          echo "Build step skipped — app.js already entry point."
-
-      # 4️⃣ 登录 Docker Hub
       - name: Log in to Docker Hub
         uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      # 5️⃣ 构建并推送镜像
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
         with:
@@ -48,8 +28,4 @@ jobs:
           tags: |
             moefurina/ncm-api:latest
             moefurina/ncm-api:${{ github.sha }}
-          platforms: linux/amd64,linux/arm64
-
-      # 6️⃣ （可选）输出镜像摘要
-      - name: Image digest
-        run: echo "Pushed image digest ${{ steps.docker_build.outputs.digest }}"
+          platforms: linux/amd64
