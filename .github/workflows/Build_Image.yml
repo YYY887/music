@@ -44,6 +44,6 @@ jobs:
           tags: |
             moefurina/ncm-api:latest
             moefurina/ncm-api:${{ env.VERSION }}
-            ghcr.io/moefurina/ncm-api:latest
-            ghcr.io/moefurina/ncm-api:${{ env.VERSION }}
+            ghcr.io/neteasecloudmusicapienhanced/ncm-api:latest
+            ghcr.io/neteasecloudmusicapienhanced/ncm-api:${{ env.VERSION }}
           platforms: linux/amd64
