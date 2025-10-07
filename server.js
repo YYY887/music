@@ -208,7 +208,9 @@ async function consturctServer(moduleDefs) {
     // Register the route.
     app.use(moduleDef.route, async (req, res) => {
       ;[req.query, req.body].forEach((item) => {
-        if (typeof item.cookie === 'string') {
+        // item may be undefined (some environments / middlewares).
+        // Guard access to avoid "Cannot read properties of undefined (reading 'cookie')".
+        if (item && typeof item.cookie === 'string') {
           item.cookie = cookieToJson(decode(item.cookie))
         }
       })
