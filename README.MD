@@ -175,4 +175,4 @@ pnpm test
 
 ## License
 
-[MIT License](https://github.com/IamFurina/NeteaseCloudMusicApiReborn/blob/main/LICENSE)
+[MIT License](https://github.com/MoeFurina/NeteaseCloudMusicApiEnhanced/blob/main/LICENSE)
