@@ -4848,6 +4848,19 @@ let data = encodeURIComponent(
 
 **调用例子:** `/broadcast/channel/list`
 
+### 获取云盘歌词
+说明: 调用此接口, 获取云盘歌曲的歌词，歌词来自此文件的音乐元数据`LYRICS`标签。
+
+**可选参数 :**
+
+`uid`: 用户 id
+
+`sid`: 云盘的歌曲 id
+
+**接口地址:** `/cloud/lyric/get`
+
+**调用例子:** `/cloud/lyric/get`
+
 ## 离线访问此文档
 
 此文档同时也是 Progressive Web Apps(PWA), 加入了 serviceWorker, 可离线访问
