@@ -258,11 +258,11 @@ async function consturctServer(moduleDefs) {
             const source = process.env.UNBLOCK_SOURCE
               ? process.env.UNBLOCK_SOURCE.split(',')
               : ['pyncmd', 'bodian', 'kuwo', 'qq', 'migu', 'kugou']
-            logger.info('开始解灰', source)
+            logger.info('Starting unblock:', source)
             const { url } = await match(req.query.id, source)
             song.url = url
             song.freeTrialInfo = 'null'
-            logger.info('解灰成功!')
+            logger.info('Unblock success!')
           }
           if (song.url && song.url.includes('kuwo')) {
             const proxy = process.env.PROXY_URL

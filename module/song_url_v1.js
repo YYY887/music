@@ -40,6 +40,7 @@ module.exports = async (query, request) => {
           status: 200,
           body: {
             code: 200,
+            msg: 'Warning: you can only adjust unblock source in dotenv config, use /song/url/match instead.',
             data: [
               {
                 id: Number(query.id),
