@@ -1,28 +1,60 @@
 const logger = require('./logger')
 // 预先定义常量和函数引用
-const chinaIPPrefixes = [
-  '116.25',
-  '116.76',
-  '116.77',
-  '116.78',
-  '116.79',
-  '116.80',
-  '116.81',
-  '116.82',
-  '116.83',
-  '116.84',
-  '116.85',
-  '116.86',
-  '116.87',
-  '116.88',
-  '116.89',
-  '116.90',
-  '116.91',
-  '116.92',
-  '116.93',
-  '116.94',
+// 中国 IP 段（来源：data/ChineseIPGenerate.csv）
+const chinaIPRangesRaw = [
+  // 开始IP,结束IP,IP个数,位置
+  ['1.0.1.0','1.0.3.255',768,'福州'],
+  ['1.0.8.0','1.0.15.255',2048,'广州'],
+  ['1.0.32.0','1.0.63.255',8192,'广州'],
+  ['1.1.0.0','1.1.0.255',256,'福州'],
+  ['1.1.2.0','1.1.63.255',15872,'广州'],
+  ['1.2.0.0','1.2.2.255',768,'北京'],
+  ['1.2.4.0','1.2.127.255',31744,'广州'],
+  ['1.3.0.0','1.3.255.255',65536,'广州'],
+  ['1.4.1.0','1.4.127.255',32512,'广州'],
+  ['1.8.0.0','1.8.255.255',65536,'北京'],
+  ['1.10.0.0','1.10.9.255',2560,'福州'],
+  ['1.10.11.0','1.10.127.255',29952,'广州'],
+  ['1.12.0.0','1.15.255.255',262144,'上海'],
+  ['1.18.128.0','1.18.128.255',256,'北京'],
+  ['1.24.0.0','1.31.255.255',524288,'赤峰'],
+  ['1.45.0.0','1.45.255.255',65536,'北京'],
+  ['1.48.0.0','1.51.255.255',262144,'济南'],
+  ['1.56.0.0','1.63.255.255',524288,'伊春'],
+  ['1.68.0.0','1.71.255.255',262144,'忻州'],
+  ['1.80.0.0','1.95.255.255',1048576,'北京'],
+  ['1.116.0.0','1.117.255.255',131072,'上海'],
+  ['1.119.0.0','1.119.255.255',65536,'北京'],
+  ['1.180.0.0','1.185.255.255',393216,'桂林'],
+  ['1.188.0.0','1.199.255.255',786432,'洛阳'],
+  ['1.202.0.0','1.207.255.255',393216,'铜仁'],
 ]
-const prefixesLength = chinaIPPrefixes.length
+
+// 将原始字符串段转换为数值段并计算总数（在模块初始化时完成一次）
+function ipToInt(ip) {
+  const parts = ip.split('.').map(Number)
+  return ((parts[0] << 24) >>> 0) + (parts[1] << 16) + (parts[2] << 8) + parts[3]
+}
+
+function intToIp(int) {
+  return [ (int >>> 24) & 0xFF, (int >>> 16) & 0xFF, (int >>> 8) & 0xFF, int & 0xFF ].join('.')
+}
+
+const chinaIPRanges = (function buildRanges() {
+  const arr = []
+  let total = 0
+  for (let i = 0; i < chinaIPRangesRaw.length; i++) {
+    const r = chinaIPRangesRaw[i]
+    const start = ipToInt(r[0])
+    const end = ipToInt(r[1])
+    const count = r[2] || (end - start + 1)
+    arr.push({ start, end, count, location: r[3] || '' })
+    total += count
+  }
+  // attach total for convenience
+  arr.totalCount = total
+  return arr
+})()
 const floor = Math.floor
 const random = Math.random
 const keys = Object.keys
@@ -79,11 +111,36 @@ module.exports = {
   },
 
   generateRandomChineseIP() {
-    // 优化：使用预绑定的函数和常量
-    const randomPrefix = chinaIPPrefixes[floor(random() * prefixesLength)]
-    const returns = `${randomPrefix}.${generateIPSegment()}.${generateIPSegment()}`
-    logger.info('Generated Random Chinese IP:', returns)
-    return returns
+    // 从预定义的中国 IP 段中按权重随机选择一个段，然后在该段内生成随机 IP
+    const total = chinaIPRanges.totalCount || 0
+    if (!total) {
+      // 兜底：回退到旧逻辑（随机 116.x 前缀）
+      const fallback = `116.${getRandomInt(25,94)}.${generateIPSegment()}.${generateIPSegment()}`
+      logger.info('Generated Random Chinese IP (fallback):', fallback)
+      return fallback
+    }
+
+    // 选择一个全局随机偏移（[0, total)）
+    let offset = Math.floor(random() * total)
+    let chosen = null
+    for (let i = 0; i < chinaIPRanges.length; i++) {
+      const seg = chinaIPRanges[i]
+      if (offset < seg.count) {
+        chosen = seg
+        break
+      }
+      offset -= seg.count
+    }
+
+    // 如果没有选中（理论上不应该发生），回退到最后一个段
+    if (!chosen) chosen = chinaIPRanges[chinaIPRanges.length - 1]
+
+    // 在段内随机生成一个 IP（使用段真实的数值范围，而非 csv 中的 count）
+    const segSize = chosen.end - chosen.start + 1
+    const ipInt = chosen.start + Math.floor(random() * segSize)
+    const ip = intToIp(ipInt)
+    logger.info('Generated Random Chinese IP:', ip, 'location:', chosen.location)
+    return ip
   },
   // 生成chainId的函数
   generateChainId(cookie) {
