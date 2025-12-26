@@ -1244,15 +1244,13 @@ tags: 歌单标签
 **必选参数 :** `id` : 音乐 id
 `level`: 播放音质等级, 分为 `standard` => `标准`,`higher` => `较高`, `exhigh`=>`极高`,
 `lossless`=>`无损`, `hires`=>`Hi-Res`, `jyeffect` => `高清环绕声`, `sky` => `沉浸环绕声`, `dolby` => `杜比全景声`, `jymaster` => `超清母带`
-`unblock`: 是否使用`UnblockNeteaseMusic`, 分为`true`和`false`
+`unblock`: 是否使用使用歌曲解锁, 分为`true`和`false`
 
 **接口地址 :** `/song/url/v1`
 
 **调用例子 :** `/song/url/v1?id=1969519579&level=exhigh` `/song/url/v1?id=1969519579,33894312&level=lossless`
 
 说明：`杜比全景声`音质需要设备支持，不同的设备可能会返回不同码率的 url。cookie 需要传入`os=pc`保证返回正常码率的 url。
-
-注意: 如果解灰出现问题, 本项目只是集成[UnblockNeteaseMusic](https://github.com/UnblockNeteaseMusic/server)的接口, 请在对应的仓库开启议题
 
 ### 音乐是否可用
 
@@ -1268,17 +1266,15 @@ tags: 歌单标签
 
 ### 直接获取灰色歌曲链接
 
-说明 : 技术来自于 [UnblockNeteaseMusic](https://github.com/unblockneteasemusic/server) 的支持, 聚合多个音源匹配(有几率匹配不成功)
+说明 : 技术部分来自于 [UnblockNeteaseMusic](https://github.com/unblockneteasemusic/server) 的支持
 
 **必选参数 :** `id` : 音乐 id
 
-**可选参数 :** `source`: 选择要解灰的音源, 目前支持`pyncmd`, `bodian`, `kuwo`, `kugou`, `qq`, `migu`, 选择多个音源中间用`,`分隔
+**可选参数 :** `source`: 选择要解灰的音源, 不支持多音源
 
 **接口地址 :** `/song/url/match`
 
-**调用例子 :** `/song/url/match?id=1969519579` `/song/url/match?id=1969519579&source=pyncmd,bodian`
-
-注意: 如果解灰出现问题, 本项目只是集成[UnblockNeteaseMusic](https://github.com/UnblockNeteaseMusic/server)的接口, 请在对应的仓库开启议题
+**调用例子 :** `/song/url/match?id=1969519579` `/song/url/match?id=1969519579`
 
 ### 搜索
 
