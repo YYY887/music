@@ -20,7 +20,6 @@
     <script src="https://fastly.jsdelivr.net/npm/axios@0.26.1/dist/axios.min.js"></script>
     <script src="https://fastly.jsdelivr.net/npm/vue"></script>
     <script>
-      const logger = require('../util/logger.js')
       const app = Vue.createApp({
         data() {
           return {
@@ -32,14 +31,14 @@
         },
         methods: {
           getData() {
-            logger.info('getdata')
+            console.info('getdata')
             const _this = this
             axios({
               url: `/user/cloud?time=${Date.now()}&cookie=${localStorage.getItem(
                 'cookie',
               )}`,
             }).then((res) => {
-              logger.info(res.data)
+              console.info(res.data)
               _this.songs = res.data.data
             })
           },
@@ -52,7 +51,7 @@
         document
           .querySelector('input[type="file"]')
           .addEventListener('change', function (e) {
-            logger.info(this.files)
+            console.info(this.files)
             let currentIndx = 0
             fileLength = this.files.length
             for (const item of this.files) {
@@ -77,15 +76,15 @@
           data: formData,
         })
           .then((res) => {
-            logger.info(`${file.name} 上传成功`)
+            console.info(`${file.name} 上传成功`)
             if (currentIndx >= fileLength) {
-              logger.info('上传完毕')
+              console.info('上传完毕')
             }
             app.getData()
           })
           .catch(async (err) => {
-            logger.info(err)
-            logger.info(fileUpdateTime)
+            console.info(err)
+            console.info(fileUpdateTime)
             fileUpdateTime[file.name]
               ? (fileUpdateTime[file.name] += 1)
               : (fileUpdateTime[file.name] = 1)

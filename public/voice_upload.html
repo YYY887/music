@@ -35,7 +35,6 @@
     <script src="https://fastly.jsdelivr.net/npm/axios@0.26.1/dist/axios.min.js"></script>
     <script src="https://fastly.jsdelivr.net/npm/vue"></script>
     <script>
-      const logger = require('../util/logger.js')
       Vue.createApp({
         data() {
           return {
@@ -62,7 +61,7 @@
         },
         methods: {
           submit() {
-            logger.info('submit')
+            console.info('submit')
             const file = document.querySelector('input[type=file]').files[0]
             this.upload(file)
           },
@@ -72,14 +71,14 @@
               url: `/voicelist/search?cookie=${localStorage.getItem('cookie')}`,
             })
 
-            logger.info(res.data.data)
+            console.info(res.data.data)
             this.voicelist = res.data.data.list
             this.voicelist.map(async (i) => {
               const res2 = await axios({
                 url: `/voicelist/list?voiceListId=${i.voiceListId}&limit=5`,
               })
               i.voiceListData = res2.data.data.list
-              logger.info(res2)
+              console.info(res2)
             })
           },
           upload(file) {
@@ -104,11 +103,11 @@
               .then((res) => {
                 alert(`${file.name} 上传成功`)
                 if (currentIndx >= fileLength) {
-                  logger.info('上传完毕')
+                  console.info('上传完毕')
                 }
               })
               .catch(async (err) => {
-                logger.info(err)
+                console.info(err)
               })
           },
         },

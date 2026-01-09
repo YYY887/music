@@ -88,7 +88,6 @@
     </details>
   </body>
   <script>
-    const logger = require('../util/logger.js')
     PetiteVue.createApp({
       message: '请点击获取登录状态',
       account: {
@@ -140,7 +139,7 @@
             cookie: localStorage.getItem('cookie'),
           },
         })
-        logger.info(res)
+        console.info(res)
         if (res.data.code != 200) {
           this.message = '加入房间出现问题: ' + res.data.message
         } else {
@@ -153,7 +152,7 @@
               cookie: localStorage.getItem('cookie'),
             },
           })
-          logger.info(res2)
+          console.info(res2)
           const res3 = await axios({
             url: 'listentogether/sync/playlist/get',
             method: 'post',
@@ -174,7 +173,7 @@
               cookie: localStorage.getItem('cookie'),
             },
           })
-          logger.info(resa)
+          console.info(resa)
           this.playlistInfo.playlistTracks = resa.data.songs
         }
       },
@@ -186,7 +185,7 @@
             cookie: localStorage.getItem('cookie'),
           },
         })
-        logger.info(res)
+        console.info(res)
         if (res.data.code != 200) {
           this.message = '创建房间出现问题: ' + res.data.message
         } else {
@@ -201,7 +200,7 @@
               cookie: localStorage.getItem('cookie'),
             },
           })
-          logger.info(res2)
+          console.info(res2)
         }
       },
       refreshRoom: async function () {
@@ -211,7 +210,7 @@
             cookie: localStorage.getItem('cookie'),
           },
         })
-        logger.info(res)
+        console.info(res)
         if (res.data.code != 200 || !res.data.data.inRoom) {
           this.message = '房间状态获取失败, 可能退出了房间'
         } else {
@@ -227,7 +226,7 @@
             cookie: localStorage.getItem('cookie'),
           },
         })
-        logger.info(res)
+        console.info(res)
         if (res.data.code != 200 || !res.data.data.success) {
           this.message = '房间关闭失败'
         } else {
@@ -244,7 +243,7 @@
             cookie: localStorage.getItem('cookie'),
           },
         })
-        logger.info(res)
+        console.info(res)
         this.playlistInfo.playlistName = res.data.playlist.name
         this.playlistInfo.playlistTrackIds = res.data.playlist.trackIds
           .map((track) => track.id)
@@ -257,7 +256,7 @@
             cookie: localStorage.getItem('cookie'),
           },
         })
-        logger.info(resa)
+        console.info(resa)
         this.playlistInfo.playlistTracks = resa.data.songs
         if (this.roomInfo.roomId) {
           const resb = await axios({
@@ -274,7 +273,7 @@
               cookie: localStorage.getItem('cookie'),
             },
           })
-          logger.info(resb)
+          console.info(resb)
         }
       },
       gotoTrack: async function (trackId) {
@@ -317,7 +316,7 @@
             cookie: localStorage.getItem('cookie'),
           },
         })
-        logger.info(res)
+        console.info(res)
       },
     }).mount()
   </script>
