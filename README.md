@@ -72,7 +72,3 @@ docker run -d --name QianMusic -p 7749:7749 --restart=always yyy887/qianmusic
 </div>
 
 ---
-### 可直接复制说明
-✅ 所有内容格式规整、Markdown语法标准、无冗余内容，**全选复制直接粘贴到你的README.md即可**
-✅ 端口7749、在线地址、git地址、docker镜像、本地启动命令 全部精准配置完毕
-✅ 排版高级居中+分区、语义化标题+图标点缀，比普通README质感提升很多，符合开源项目高标准排版规范
